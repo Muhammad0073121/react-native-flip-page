@@ -1,93 +1,64 @@
+[![npm version](https://badge.fury.io/js/react-native-flip-page.svg)](https://badge.fury.io/js/react-native-flip-page)
+
 # react-native-flip-page
 
+> **DISCLAIMER**: This package is in no way related to nor endorsed by Flipboard, Inc. nor [flipboard.com](http://www.flipboard.com). This is just a showcase of effect implemented with React Native.
 
+This package allows you to use the cool Flipboard page swipe effect in your React Native apps.
 
-## Getting started
+![Demo GIF](https://raw.githubusercontent.com/darenju/react-native-flip-page/master/demo.gif)
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Install
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+Installation is pretty straight-forward, as you just have to `npm install` this package:
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/Muhammad0073121/react-native-flip-page.git
-git branch -M main
-git push -uf origin main
+npm install --save react-native-flip-page
 ```
 
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/Muhammad0073121/react-native-flip-page/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+Then, use the module by importing in in your app code.
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+This package consists of two components. Simply throw a `FlipPage` component with some `FlipPagePage` children that will be the content.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+```
+import FlipPage, {FlipPagePage} from 'react-native-flip-page';
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+const [currentPage, setCurrentPage] = React.useState(0);
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+<FlipPage
+        initialPage={currentPage}
+        orientation="horizontal"
+        reverse={true}>>
+  <FlipPagePage>
+    <Text>Page 1</Text>
+  </FlipPagePage>
+  <FlipPagePage>
+    <Text>Page 2</Text>
+  </FlipPagePage>
+  <FlipPagePage>
+    <Text>Page 3</Text>
+  </FlipPagePage>
+</FlipPage>
+```
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+### Props
 
-## License
-For open source projects, say how it is licensed.
+There are a few properties that define the behaviour of the component, here they are:
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+| Prop                                | Type       | Default    |  Role                                                                                                                                                               |
+| ----------------------------------- | ---------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `loopForever`                       | `bool`     | `false`    | Indicates if the component should go back to the first page when reaching last page, and go back to last page after reaching first page.                            |
+| `orientation`                       | `string`   | `vertical` |  Orientation of swipes. `vertical` or `horizontal` for respectively up/down swipes and left/right swipes.                                                           |
+| `onFinish(orientation)`             | `function` | `null`     |  Function called after the swipe is finished. Only usable if `loopForever` is `false`.                                                                              |
+| `reverse`                           | `bool`     | `false`    |  If true, the user must swip in reverse order: he must swipe down/right to see the next page, and up/left to see the previous page.(Good for Rtl book like persian) |
+| `onPageChange(pageIndex,direction)` | `function` | `null`     |  Callback when the page has been changed. Parameters: pageIndex, direction                                                                                          |
+| `initialPage`                       | `number`   | `1`        |  Indicated the current page to be displayed                                                                                                                         |
+
+## Contribute
+
+Since this is an open source project and it's far from perfect, contribution is welcome. Fork the repository and start working on your fix or new feature. Remember, it's good practice to work in your own branch, to avoid painful merge conflicts.
+
+Once you think your work is ready, fire a [pull request](https://github.com/darenju/react-native-flip-page/pulls) with an understandable description of what you're bringing to the project. If it's alright, chances are high your work will be merged!
