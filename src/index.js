@@ -18,6 +18,7 @@ class FlipPage extends React.Component {
       shouldGoNext: false,
       shouldGoPrevious: false,
       direction: "",
+      animating: false,
     };
 
     this.firstHalves = [];
@@ -96,6 +97,12 @@ class FlipPage extends React.Component {
     const { direction } = this.state;
     const { orientation, loopForever, reverse } = this.props;
     const dn = orientation === "vertical" ? dy : dx;
+
+    console.log("handlePanResponderMove");
+
+    if (this.state.animating) {
+      return;
+    }
 
     let angle = (dn / 250) * 180;
 
@@ -176,6 +183,13 @@ class FlipPage extends React.Component {
       const { onFinish } = this.props;
       const { direction } = this.state;
       this.setState({ direction: "" });
+
+      this.state.animating = true;
+
+      //Timeout to prevent the page from flipping back immediately
+      setTimeout(() => {
+        this.state.animating = false;
+      }, 500);
 
       if (shouldGoNext) {
         this.setState(
